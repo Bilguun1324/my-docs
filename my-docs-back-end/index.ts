@@ -11,12 +11,17 @@ const server = new ApolloServer({
 });
 
 const uri: any = process.env.URI;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const connection = mongoose.connection;
 
-connection.once("open", () => {
-    console.log("MongoDB database connection established successfully");
-});
+try { 
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    const connection = mongoose.connection;
+
+    connection.once("open", () => {
+        console.log("MongoDB database connection established successfully");
+    });
+} catch (error) {
+    console.log(error);
+}
 
 server.listen().then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);

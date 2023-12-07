@@ -1,16 +1,11 @@
-import { addUser, getUser, addDrugToUser } from "./userResolver";
-import { addDrug, getDrug } from "./drugResolver";
-import { addRecord } from "./recordResolver";
+import { addModule, getModule, getModules } from "./moduleResolver";
 
 export default {
   Query: {
-    getUser,
-    getDrug,
+    getModule,
+    getModules,
   },
   Mutation: {
-    addUser,
-    addDrug,
-    addRecord,
-    addDrugToUser,
+    addModule,
   },
 };

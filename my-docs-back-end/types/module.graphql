@@ -1,0 +1,35 @@
+scalar object
+
+type ModuleDescription {
+    id: ID
+    title: String
+    description: String
+    image: String
+    code: String
+}
+
+input ModuleDescriptionInput {
+    title: String
+    description: String
+    image: String
+    code: String
+}
+
+type Module {
+    id: ID
+    name: String!
+    image: String
+    descriptions: [ModuleDescription]
+    code: String!
+}
+
+type Query {
+    getModules: [Module]
+    getModule(id: ID!): Module
+}
+
+type Mutation {
+    addModule(name: String!, description: String, image: String, code: String!, descriptions: [ModuleDescriptionInput]): Module
+    updateModule(id: ID!, name: String, image: String, code: String): Module
+    deleteModule(id: ID!): Module
+}
