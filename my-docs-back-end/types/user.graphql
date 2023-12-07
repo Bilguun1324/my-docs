@@ -1,0 +1,25 @@
+type User {
+  _id: String
+  firstName: String
+  age: String
+  gender: String
+  records: [Record]
+  drugs: [CustomDrug]
+}
+
+type Mutation {
+  addUser(
+    firstName: String
+    records: [String]
+    age: String
+    gender: String
+  ): User
+  addDrugToUser(
+    drug: CustomDrugInput
+    user_id: String
+  ): User
+}
+
+type Query {
+  getUser(_id: String): User
+}

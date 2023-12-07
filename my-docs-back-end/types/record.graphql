@@ -1,0 +1,41 @@
+scalar object
+
+type CustomDrug {
+  _id: String
+  drug_id: Drug
+  dose: String
+  duration: String
+  frequency: String
+  date: String
+  type: String
+}
+
+input CustomDrugInput {
+  drug_id: String
+  dose: String
+  duration: String
+  frequency: String
+  date: String
+  type: String
+}
+
+type Record {
+  _id: String
+  category: String
+  title: String
+  note: String
+  drugs: [CustomDrug]
+  image: String
+}
+
+type Mutation {
+  addRecord(
+    category: String
+    title: String
+    note: String
+    drugs: [CustomDrugInput]
+    user_id: String
+    image: String
+    type: String
+  ): Record
+}
