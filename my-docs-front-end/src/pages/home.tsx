@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
+import { Container } from "../components";
 
 export const Home = () => {
   return (
-    <div>
+    <Container>
       <Button variant="contained">Hello World</Button>
-    </div>
+    </Container>
   );
 };
