@@ -1,8 +1,10 @@
+import { Container } from "../components";
+
 export const Error = () => {
     return (
-      <div>
-        error 404
-      </div>
+      <Container>
+        Error 404 no page found
+      </Container>
     );
   }
   

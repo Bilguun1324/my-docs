@@ -1,9 +1,9 @@
-import { Box } from "@mui/material";
+import { Container } from "./container";
 
 export const Loading = () => {
   return (
-    <Box width="100%" height="100%">
+    <Container>
       Loading...
-    </Box>
+    </Container>
   );
 };
