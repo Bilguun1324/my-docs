@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "./graphql";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, Error, Module } from "./pages";
+import { Home, Error, Module, AddModule } from "./pages";
 import { Box } from "@mui/material";
 import { Navigation } from "./components";
 import { ModuleProvider } from "./providers/modules-provider";
@@ -23,6 +23,7 @@ root.render(
               <Route path="/" element={<Home />} />
               <Route path="/404" element={<Error />} />
               <Route path="/modules/:moduleId" element={<Module />} />
+              <Route path="/addModule" element={<AddModule />} />
             </Routes>
           </BrowserRouter>
         </Box>
