@@ -3,16 +3,18 @@ import { Box, TextField } from "@mui/material";
 import { Button } from "../components";
 import { useMutation } from "@apollo/client";
 import { ADD_MODULE, GET_ALL_MODULES } from "../graphql";
+import { useStorage } from "../firebase";
 
 type AddModuleType = {
   name: string;
-  image: string;
+  image: File | undefined;
   description: string;
   code: string;
 };
 
 export const AddModule = () => {
-  const [addModule, { loading, data, error }] = useMutation(ADD_MODULE, {
+  const { uploadImage } = useStorage();
+  const [addModule] = useMutation(ADD_MODULE, {
     refetchQueries: [
       {
         query: GET_ALL_MODULES,
@@ -21,7 +23,7 @@ export const AddModule = () => {
   });
   const [addingModule, setAddingModule] = useState<AddModuleType>({
     name: "",
-    image: "",
+    image: undefined,
     description: "",
     code: "",
   });
@@ -33,18 +35,32 @@ export const AddModule = () => {
     }));
   };
 
-  const handleAddModule = () => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setAddingModule((prevModule) => ({
+        ...prevModule,
+        image: event && event.target.files ? event.target.files[0] : undefined,
+      }));
+    }
+  };
+  console.log("this is env file: ", process.env.PROJECT_ID)
+
+  const handleAddModule = async () => {
     console.log(addingModule);
-    let { name, image, description, code } = addingModule;
+    let urls = await uploadImage(
+      addingModule.image as File | File[],
+      "modules",
+      "test"
+    );
+    let { name, description, code } = addingModule;
     addModule({
       variables: {
         name: name,
-        image: image,
+        image: urls[0],
         description: description,
         code: code,
       },
     });
-    console.log(error);
   };
 
   return (
@@ -67,11 +83,7 @@ export const AddModule = () => {
         value={addingModule.description}
         onChange={(e) => handleInput("description", e.target.value)}
       />
-      <TextField
-        label="Module Image"
-        value={addingModule.image}
-        onChange={(e) => handleInput("image", e.target.value)}
-      />
+      <input type="file" onChange={handleFileChange} />
       <TextField
         multiline
         rows={6}
