@@ -29,7 +29,7 @@ type Query {
 }
 
 type Mutation {
-    addModule(name: String!, description: String, image: String, code: String!, descriptions: [ModuleDescriptionInput]): Module
+    addModule(name: String!, description: String, image: String, code: String!, descriptions: [ModuleDescriptionInput], passkey: String!): Module
     updateModule(id: ID!, name: String, image: String, code: String): Module
     deleteModule(id: ID!): Module
 }
