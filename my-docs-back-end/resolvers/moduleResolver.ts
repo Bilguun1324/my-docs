@@ -1,6 +1,10 @@
 import { ModuleModel } from "../schemas";
 
 const addModule = async (_: any, params: any) => {
+  const { passkey } = params;
+  if (passkey !== process.env.PASS_KEY) {
+    throw new Error("Invalid passkey");
+  }
   const module = new ModuleModel(params);
 
   try {
