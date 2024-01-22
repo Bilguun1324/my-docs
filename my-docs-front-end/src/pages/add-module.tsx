@@ -10,6 +10,7 @@ type AddModuleType = {
   image: File | undefined;
   description: string;
   code: string;
+  passkey: string;
 };
 
 export const AddModule = () => {
@@ -26,6 +27,7 @@ export const AddModule = () => {
     image: undefined,
     description: "",
     code: "",
+    passkey: "",
   });
 
   const handleInput = (field: string, value: string) => {
@@ -43,22 +45,24 @@ export const AddModule = () => {
       }));
     }
   };
-  console.log("this is env file: ", process.env.PROJECT_ID)
 
   const handleAddModule = async () => {
-    console.log(addingModule);
-    let urls = await uploadImage(
-      addingModule.image as File | File[],
-      "modules",
-      "test"
-    );
-    let { name, description, code } = addingModule;
+    let { name, description, code, passkey } = addingModule;
+    let urls = undefined;
+    if (addingModule.image) {
+      urls = await uploadImage(
+        addingModule.image as File | File[],
+        "modules",
+        "test"
+      );
+    }
     addModule({
       variables: {
         name: name,
-        image: urls[0],
+        image: urls ? urls[0] : undefined,
         description: description,
         code: code,
+        passkey: passkey,
       },
     });
   };
@@ -73,6 +77,11 @@ export const AddModule = () => {
       alignItems="center"
       gap={1}
     >
+      <TextField
+        label="Passkey"
+        value={addingModule.passkey}
+        onChange={(e) => handleInput("passkey", e.target.value)}
+      />
       <TextField
         label="Module Name"
         value={addingModule.name}
