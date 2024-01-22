@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { ModuleContext } from "../providers/modules-provider";
 import { ModuleType } from "../utils";
-import { Box, Container } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { CopyBlock, dracula } from "react-code-blocks";
+import { Loading } from "../components";
 
 export const Module = () => {
   const { moduleId } = useParams();
@@ -20,16 +21,33 @@ export const Module = () => {
     }
   }, [modules]);
 
+  if (!module) {
+    return <Loading />;
+  }
+
   return (
-    <Container>
-      {/* Header */}
-      <Box>{module?.name}</Box>
+    <Box width="100%" height="100vh" overflow="auto">
+      <Box display="flex" flexDirection="column" padding={2} gap={2}>
+        {/* Header */}
+        <Typography variant="h2">{module.name}</Typography>
 
-      {/* Image */}
-      <img src={module?.image} />
+        {/* Header */}
+        <Typography variant="body1">{module.description}</Typography>
 
-      {/* Codes */}
-      <CopyBlock text={module ? module.code : ""} language="javascript" theme={dracula}/>
-    </Container>
+        {/* Image */}
+        <Box
+          component="img"
+          src={module.image}
+          maxHeight="50vh"
+          width="50vw"
+          sx={{
+            objectFit: "cover",
+          }}
+        ></Box>
+
+        {/* Codes */}
+        <CopyBlock text={module.code} language="javascript" theme={dracula} />
+      </Box>
+    </Box>
   );
 };
