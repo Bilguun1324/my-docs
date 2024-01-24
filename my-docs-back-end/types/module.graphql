@@ -19,6 +19,7 @@ type Module {
     id: ID
     name: String!
     image: String
+    description: String
     descriptions: [ModuleDescription]
     code: String!
 }
