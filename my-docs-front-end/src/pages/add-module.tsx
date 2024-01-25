@@ -48,19 +48,15 @@ export const AddModule = () => {
 
   const handleAddModule = async () => {
     let { name, description, code, passkey } = addingModule;
-    let urls = undefined;
-    if (addingModule.image) {
-      urls = await uploadImage(
-        addingModule.image as File | File[],
-        "modules",
-        "test"
-      );
-    }
+    const urls = await uploadImage(
+      addingModule.image as File | File[],
+      "modules",
+      "test"
+    );
     addModule({
       variables: {
         name: name,
-        image: urls ? urls[0] : undefined,
-        description: description,
+        image: urls[0],
         code: code,
         passkey: passkey,
       },
