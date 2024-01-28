@@ -16,27 +16,31 @@ export const Navigation = () => {
     }
   }, [data]);
 
+  if (loading) {
+    return (
+      <Box width={300} height="100%" bgcolor={colors.primary}>
+        <Loading />
+      </Box>
+    );
+  }
+
   return (
     <Box width={300} height="100%" bgcolor={colors.primary}>
-      {loading ? (
-        <Loading />
-      ) : (
-        <Box display="flex" flexDirection="column">
-          {data.getModules.map((module: ModuleType) => {
-            return (
-              <Link
-                key={module.id}
-                underline="hover"
-                href={`/modules/${module.id}`}
-                color="black"
-                sx={{ padding: 2 }}
-              >
-                {module.name}
-              </Link>
-            );
-          })}
-        </Box>
-      )}
+      <Box display="flex" flexDirection="column">
+        {data.getModules.map((module: ModuleType) => {
+          return (
+            <Link
+              key={module.id}
+              underline="hover"
+              href={`/modules/${module.id}`}
+              color="black"
+              sx={{ padding: 2 }}
+            >
+              {module.name}
+            </Link>
+          );
+        })}
+      </Box>
     </Box>
   );
 };

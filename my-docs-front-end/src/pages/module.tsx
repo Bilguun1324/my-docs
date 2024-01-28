@@ -27,23 +27,25 @@ export const Module = () => {
 
   return (
     <Box width="100%" height="100vh" overflow="auto">
-      <Box display="flex" flexDirection="column" padding={2} gap={2}>
+      <Box display="flex" flexDirection="column" padding={4} gap={2}>
         {/* Header */}
         <Typography variant="h2">{module.name}</Typography>
 
-        {/* Header */}
+        {/* Description */}
         <Typography variant="body1">{module.description}</Typography>
 
         {/* Image */}
-        <Box
-          component="img"
-          src={module.image}
-          maxHeight="50vh"
-          width="50vw"
-          sx={{
-            objectFit: "cover",
-          }}
-        ></Box>
+        {module.image && (
+          <Box
+            component="img"
+            src={module.image}
+            maxHeight="50vh"
+            width="50vw"
+            sx={{
+              objectFit: "cover",
+            }}
+          />
+        )}
 
         {/* Codes */}
         <CopyBlock text={module.code} language="javascript" theme={dracula} />
