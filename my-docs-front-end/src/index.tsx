@@ -8,15 +8,17 @@ import { Home, Error, Module, AddModule } from "./pages";
 import { Box } from "@mui/material";
 import { Navigation } from "./components";
 import { ModuleProvider } from "./providers/modules-provider";
+import { colors } from "./utils";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <ModuleProvider>
       <ApolloProvider client={apolloClient}>
-        <Box width="100vw" height="100vh" display="flex">
+        <Box width="100vw" height="100vh" display="flex" bgcolor={colors.primary}>
           <Navigation />
           <BrowserRouter>
             <Routes>
