@@ -1,12 +1,9 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { client } from "@/graphql";
 import { GET_ALL_MODULES } from "@/graphql";
 import { Navigation } from "@/components";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Bilguun Docs",
@@ -20,7 +17,7 @@ const RootLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="flex">
         <Navigation modules={data.getModules}/>
         {children}
       </body>
