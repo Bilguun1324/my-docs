@@ -16,7 +16,8 @@ export const Navigation = ({ modulesFromSSR }: { modulesFromSSR: ModuleType[]}) 
     if (!data) return;
 
     setModules(data.getModules);
-  }, [data, modules]);
+  }, [data, modules, modulesFromSSR, setModules]);
+  
 
   return (
     <div
