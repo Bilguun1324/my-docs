@@ -12,13 +12,13 @@ type ModulePageProps = {
 
 const ModulePage: FC<ModulePageProps> = ({ params }) => {
   const { modules } = useContext(ModuleContext);
-  const module = modules?.find((module) => module.id === params.module);
+  const currentModule = modules?.find((module) => module.id === params.module);
 
-  if (!module) {
+  if (!currentModule) {
     return <div>loading</div>;
   }
 
-  const { name, code, image, description } = module;
+  const { name, code, image, description } = currentModule;
 
   return (
     <div className="flex flex-col overflow-auto items-center mt-8 w-2/3">
