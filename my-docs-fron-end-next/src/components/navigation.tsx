@@ -1,24 +1,28 @@
 "use client";
+import { useContext, useEffect } from "react";
 import { ModuleType } from "@/utils";
 import Link from "next/link";
-import { useContext } from "react";
 import { ModuleContext } from "@/providers/modules-provider";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_MODULES } from "@/graphql";
 
-type NavigationProps = {
-  modules: ModuleType[];
-};
+export const Navigation = ({ modulesFromSSR }: { modulesFromSSR: ModuleType[]}) => {
+  const { setModules, modules } = useContext(ModuleContext);
+  const { data } = useQuery(GET_ALL_MODULES);
 
-export const Navigation = (props: NavigationProps) => {
-  const { setModules } = useContext(ModuleContext);
-  const { modules } = props;
+  useEffect(() => {
+    setModules(modulesFromSSR);
 
-  setModules(modules);
+    if (!data) return;
+
+    setModules(data.getModules);
+  }, [data, modules]);
 
   return (
     <div
-      className={`w-64 p-6 flex flex-col justify-start overflow-auto h-full border-r-slate-400 border-r`}
+      className={`w-1/5 p-6 flex flex-col justify-start overflow-auto h-screen border-r-slate-400 border-r`}
     >
-      {modules.map((module: ModuleType) => (
+      {modules?.map((module: ModuleType) => (
         <Link
           key={module.id}
           className={`text-zinc-300 cursor-pointer w-fit mb-4 hover:text-zinc-100`}

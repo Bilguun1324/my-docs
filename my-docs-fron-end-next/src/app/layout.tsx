@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
-import { client } from "@/graphql";
-import { GET_ALL_MODULES } from "@/graphql";
 import { RootLayout } from "@/components";
+import { GET_ALL_MODULES, client } from "@/graphql"
 
 export const metadata: Metadata = {
   title: "Bilguun Docs",
@@ -11,9 +10,13 @@ export const metadata: Metadata = {
 };
 
 const Layout = async ({ children }: Readonly<{ children: ReactNode }>) => {
-  const { data } = await client.query({
+  const { data, error } = await client.query({
     query: GET_ALL_MODULES,
   });
+
+  if (error) {
+    return <div>Error</div>
+  }
 
   return (
     <html lang="en" className="w-full h-full">
