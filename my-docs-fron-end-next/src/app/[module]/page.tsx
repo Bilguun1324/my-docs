@@ -2,7 +2,7 @@
 import { FC, useContext } from "react";
 import { ModuleContext } from "@/providers/modules-provider";
 import Image from "next/image";
-import { CopyBlock, dracula } from "react-code-blocks";
+import { CodeBlock, dracula } from "react-code-blocks";
 
 type ModulePageProps = {
   params: {
@@ -12,7 +12,7 @@ type ModulePageProps = {
 
 const ModulePage: FC<ModulePageProps> = ({ params }) => {
   const { modules } = useContext(ModuleContext);
-  const module = modules.find((module) => module.id === params.module);
+  const module = modules?.find((module) => module.id === params.module);
 
   if (!module) {
     return <div>loading</div>;
@@ -21,17 +21,15 @@ const ModulePage: FC<ModulePageProps> = ({ params }) => {
   const { name, code, image, description } = module;
 
   return (
-    <div className="p-8 grid gap-8 overflow-auto">
-      <div className="text-zinc-300 text-3xl">{name}</div>
-      <div className="text-zinc-300">{description}</div>
+    <div className="flex flex-col overflow-auto items-center mt-8 w-2/3">
+      <div className="text-zinc-300 text-3xl mb-8 w-full">{name}</div>
+      <div className="text-zinc-300 mb-8 w-full">{description}</div>
       {image && (
         <Image alt="Module Picture" src={image} width={500} height={500} />
       )}
-      <CopyBlock
-        text={code}
-        language="javascript"
-        theme={dracula}
-      />
+      <div className="w-full">
+        <CodeBlock text={code} language="javascript" theme={dracula} />
+      </div>
     </div>
   );
 };
