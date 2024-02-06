@@ -10,6 +10,7 @@ export const GET_ALL_MODULES = gql`
       image
       title
     }
+    video
     image
     name
     id
