@@ -19,9 +19,10 @@ type Module {
     id: ID
     name: String!
     image: String
+    video: String
     description: String
     descriptions: [ModuleDescription]
-    code: String!
+    code: String
 }
 
 type Query {
@@ -30,7 +31,7 @@ type Query {
 }
 
 type Mutation {
-    addModule(name: String!, description: String, image: String, code: String!, descriptions: [ModuleDescriptionInput], passkey: String!): Module
+    addModule(name: String!, description: String, image: String, code: String, video: String, descriptions: [ModuleDescriptionInput], passkey: String!): Module
     updateModule(id: ID!, name: String, image: String, code: String): Module
     deleteModule(id: ID!): Module
 }
