@@ -25,9 +25,6 @@ const ModulePage: FC<ModulePageProps> = ({ params }) => {
     <div className="flex flex-col overflow-auto items-center mt-8 w-2/3">
       <div className="text-zinc-300 text-3xl mb-8 w-full">{name}</div>
       <div className="text-zinc-300 mb-8 w-full">{description}</div>
-      {image && (
-        <Image alt="Module Picture" src={image} width={500} height={500} />
-      )}
       {video && (
         <ReactPlayer
           url={video}
