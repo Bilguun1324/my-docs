@@ -4,6 +4,7 @@ const ModuleSchema = new Schema({
   name: { type: String, maxlength: 50 },
   description: { type: String },
   image: { type: String },
+  video: { type: String },
   code: { type: String },
   descriptions: {
     type: [
