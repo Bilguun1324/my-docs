@@ -1,3 +1,3 @@
-export const InputWidth = 400;
-export const MediumWidth = 300;
-export const SmallWidth = 50;
+export const inputWidth = 72;
+export const mediumWidth = 64;
+export const smallWidth = 16;

@@ -8,6 +8,7 @@ export const ADD_MODULE = gql`
     $image: String
     $code: String!
     $passkey: String!
+    $video: String
   ) {
     addModule(
       name: $name
@@ -16,6 +17,7 @@ export const ADD_MODULE = gql`
       image: $image
       code: $code
       passkey: $passkey
+      video: $video
     ) {
       code
       descriptions {
