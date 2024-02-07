@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ModuleContext } from "@/providers/modules-provider";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_MODULES } from "@/graphql";
+import { MenuBar } from "./menu-bar";
 
 export const Navigation = ({
   modulesFromSSR,
@@ -27,6 +28,7 @@ export const Navigation = ({
     <div
       className={`w-1/5 p-6 flex flex-col justify-start overflow-auto h-screen border-r-slate-400 border-r`}
     >
+      <MenuBar />
       {modules?.map((module: ModuleType) => (
         <Link
           key={module.id}
