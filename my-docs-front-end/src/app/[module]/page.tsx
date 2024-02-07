@@ -1,7 +1,6 @@
 "use client";
 import { FC, useContext } from "react";
 import { ModuleContext } from "@/providers/modules-provider";
-import Image from "next/image";
 import { CodeBlock, dracula } from "react-code-blocks";
 import ReactPlayer from "react-player/youtube";
 
