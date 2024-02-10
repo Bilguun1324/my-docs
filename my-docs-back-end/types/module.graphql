@@ -2,25 +2,21 @@ scalar object
 
 type ModuleDescription {
     id: ID
-    title: String
-    description: String
-    image: String
+    text: String
+    video: String
     code: String
 }
 
 input ModuleDescriptionInput {
-    title: String
-    description: String
-    image: String
+    text: String
+    video: String
     code: String
 }
 
 type Module {
     id: ID
-    name: String!
-    image: String
+    text: String
     video: String
-    description: String
     descriptions: [ModuleDescription]
     code: String
 }
@@ -31,7 +27,7 @@ type Query {
 }
 
 type Mutation {
-    addModule(name: String!, description: String, image: String, code: String, video: String, descriptions: [ModuleDescriptionInput], passkey: String!): Module
-    updateModule(id: ID!, name: String, image: String, code: String): Module
+    addModule(text: String!, code: String, video: String, descriptions: [ModuleDescriptionInput], passkey: String!): Module
+    updateModule(id: ID!, text: String, video: String code: String): Module
     deleteModule(id: ID!): Module
 }
