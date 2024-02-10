@@ -18,15 +18,14 @@ const ModulePage: FC<ModulePageProps> = ({ params }) => {
     return <div>loading</div>;
   }
 
-  const { name, code, description, video } = currentModule;
+  const { text, code, video } = currentModule;
 
   const markDownCode = "```javascript\n" + code + "\n```";
 
   return (
     <div className="flex flex-col overflow-auto items-center mt-8 w-2/3">
-      <div className="text-zinc-300 text-3xl mb-8 w-full">{name}</div>
       <div className="text-zinc-300 mb-8 w-full">
-        <MarkDown>{description}</MarkDown>
+        <MarkDown>{text}</MarkDown>
       </div>
       {video && <ReactPlayer url={video} controls />}
       <div className="text-zinc-300 mb-8 w-full bg-default-gray p-4 rounded-lg overflow-auto h-fit">

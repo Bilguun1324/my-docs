@@ -2,32 +2,29 @@ import { gql } from "@apollo/client";
 
 export const ADD_MODULE = gql`
   mutation Mutation(
-    $name: String!
-    $description: String
-    $descriptions: [ModuleDescriptionInput]
-    $image: String
-    $code: String!
+    $text: String!
     $passkey: String!
+    $code: String
     $video: String
+    $descriptions: [ModuleDescriptionInput]
   ) {
     addModule(
-      name: $name
-      description: $description
-      descriptions: $descriptions
-      image: $image
-      code: $code
+      text: $text
       passkey: $passkey
+      code: $code
       video: $video
+      descriptions: $descriptions
     ) {
       code
       descriptions {
         code
-        description
-        image
-        title
+        id
+        text
+        video
       }
-      image
-      name
+      id
+      text
+      video
     }
   }
 `;

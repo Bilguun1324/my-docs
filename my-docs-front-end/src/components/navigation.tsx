@@ -41,7 +41,7 @@ export const Navigation = ({
           key={module.id}
           className="w-full text-zinc-300 cursor-pointer mb-4 hover:text-zinc-100 active:text-zinc-100"
         >
-          <Link href={module.id}>{module.name}</Link>
+          <Link href={module.id}>{module.text.split('\n')[0]}</Link>
         </motion.span>
       ))}
     </motion.div>
