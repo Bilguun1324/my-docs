@@ -1,8 +1,8 @@
 "use client";
 import { FC, useContext } from "react";
 import { ModuleContext } from "@/providers/modules-provider";
-import { CodeBlock, dracula } from "react-code-blocks";
 import ReactPlayer from "react-player/youtube";
+import MarkDown from "react-markdown";
 
 type ModulePageProps = {
   params: {
@@ -18,20 +18,19 @@ const ModulePage: FC<ModulePageProps> = ({ params }) => {
     return <div>loading</div>;
   }
 
-  const { name, code, image, description, video } = currentModule;
+  const { name, code, description, video } = currentModule;
+
+  const markDownCode = "```javascript\n" + code + "\n```";
 
   return (
     <div className="flex flex-col overflow-auto items-center mt-8 w-2/3">
       <div className="text-zinc-300 text-3xl mb-8 w-full">{name}</div>
-      <div className="text-zinc-300 mb-8 w-full">{description}</div>
-      {video && (
-        <ReactPlayer
-          url={video}
-          controls
-        />
-      )}
-      <div className="w-full mt-12">
-        <CodeBlock text={code} language="javascript" theme={dracula} />
+      <div className="text-zinc-300 mb-8 w-full">
+        <MarkDown>{description}</MarkDown>
+      </div>
+      {video && <ReactPlayer url={video} controls />}
+      <div className="text-zinc-300 mb-8 w-full bg-default-gray p-4 rounded-lg overflow-auto h-fit">
+        <MarkDown>{markDownCode}</MarkDown>
       </div>
     </div>
   );
