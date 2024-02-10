@@ -15,14 +15,13 @@ const AddModule = () => {
   });
 
   const [moduleDetails, setModuleDetails] = useState<AddModuleType>({
-    name: "",
     video: "",
-    description: "",
+    text: "",
     code: "",
     passkey: "",
   });
 
-  const { name, video, description, code, passkey } = moduleDetails;
+  const { code, video, text, passkey } = moduleDetails;
 
   const handleInput = (field: string, value: string) => {
     setModuleDetails((prevModule) => ({
@@ -49,10 +48,9 @@ const AddModule = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Input value={name} onChange={(val) => handleInput("name", val)} />
       <Input
-        value={description}
-        onChange={(val) => handleInput("description", val)}
+        value={text}
+        onChange={(val) => handleInput("text", val)}
       />
       <Input value={code} onChange={(val) => handleInput("code", val)} />
       <Input value={passkey} onChange={(val) => handleInput("passkey", val)} />

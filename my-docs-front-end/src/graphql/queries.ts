@@ -1,20 +1,18 @@
 import { gql } from "@apollo/client";
 
 export const GET_ALL_MODULES = gql`
-  query Query {
+  query GetModules {
   getModules {
     code
     descriptions {
       code
-      description
-      image
-      title
+      id
+      text
+      video
     }
-    video
-    image
-    name
     id
-    description
+    text
+    video
   }
 }
 `;

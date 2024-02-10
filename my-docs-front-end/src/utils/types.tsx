@@ -1,25 +1,21 @@
 type ModuleDescription = {
   id: string;
-  title: string;
-  description: string;
-  image: string;
+  text: string;
+  video: string;
   code: string;
 };
 
 export type ModuleType = {
   id: string;
-  name: string;
-  image: string;
+  text: string;
   video: string;
-  description: string;
   descriptions: [ModuleDescription];
   code: string;
 };
 
 export type AddModuleType = {
-  name: string;
-  description: string;
-  code: string;
+  text: string;
   video: string;
+  code: string;
   passkey: string;
 };
