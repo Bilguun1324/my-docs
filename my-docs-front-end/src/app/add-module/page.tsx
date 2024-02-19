@@ -1,9 +1,10 @@
 "use client";
 import { Input } from "@/components";
 import { ADD_MODULE, GET_ALL_MODULES } from "@/graphql";
-import { AddModuleType } from "@/utils";
+import { AddModuleType, textAreaHeight } from "@/utils";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
+import MarkDown from "react-markdown";
 
 const AddModule = () => {
   const [addModule, { error, loading }] = useMutation(ADD_MODULE, {
@@ -31,7 +32,8 @@ const AddModule = () => {
   };
 
   const createModule = async () => {
-    const variables = video !== "" ? moduleDetails : { ...moduleDetails, video: null };
+    const variables =
+      video !== "" ? moduleDetails : { ...moduleDetails, video: null };
 
     await addModule({
       variables: variables,
@@ -47,19 +49,41 @@ const AddModule = () => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <Input
-        value={text}
-        onChange={(val) => handleInput("text", val)}
+    <div className="flex flex-col gap-4 w-full p-12 text-zinc-300">
+      <div>Module Description</div>
+      <div className="flex gap-4">
+        <textarea
+          value={text}
+          onChange={(e) => handleInput("text", e.target.value)}
+          className={`h-${textAreaHeight} w-full p-2 rounded text-black`}
+        />
+        <MarkDown
+          className={`min-h-${textAreaHeight} w-full bg-default-gray p-2 h-fit text-zinc-300 rounded`}
+        >
+          {text}
+        </MarkDown>
+      </div>
+      <div>Write your code here: </div>
+      <textarea
+        value={code}
+        className={`h-${textAreaHeight} w-full p-2 text-black`}
+        onChange={(e) => handleInput("code", e.target.value)}
       />
-      <Input value={code} onChange={(val) => handleInput("code", val)} />
-      <Input value={passkey} onChange={(val) => handleInput("passkey", val)} />
-      <Input
-        value={video}
-        onChange={(val) => handleInput("video", val)}
-      />
-
-      <div onClick={() => createModule()} className="bg-white">
+      <div className="flex justify-between items-center">
+        <div className="flex gap-4">
+          <div className="flex items-center">Write your passkey: </div>
+          <Input
+            value={passkey}
+            type="password"
+            onChange={(val) => handleInput("passkey", val)}
+          />
+        </div>
+        <div className="flex gap-4">
+          <div className="flex items-center">Write your video link here: </div>
+          <Input value={video} onChange={(val) => handleInput("video", val)} />
+        </div>
+      </div>
+      <div onClick={() => createModule()} className="bg-white text-black">
         AddModule
       </div>
     </div>
